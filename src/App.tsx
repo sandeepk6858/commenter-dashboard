@@ -46,14 +46,33 @@ function App() {
             </>
           }
         />
+
+        <Route
+          path="/auth/signin"
+          element={
+            <>
+              <PageTitle title="Signin" />
+              <SignIn />
+            </>
+          }
+        />
+        <Route
+          path="/auth/signup"
+          element={
+            <>
+              <PageTitle title="Signup" />
+              <SignUp />
+            </>
+          }
+        />
         {/* WORKING */}
 
         <Route
           index
           element={
             <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <ECommerce />
+              <PageTitle title="Sign up" />
+              <SignUp />
             </>
           }
         />
@@ -135,24 +154,6 @@ function App() {
             <>
               <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Buttons />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signin"
-          element={
-            <>
-              <PageTitle title="Signin | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <SignIn />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signup"
-          element={
-            <>
-              <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <SignUp />
             </>
           }
         />
