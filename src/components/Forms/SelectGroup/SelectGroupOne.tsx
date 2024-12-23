@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { PlanOptions } from '../../../pages/Users/CreateUserForm';
 
-const SelectGroupOne: React.FC = () => {
+interface SelectOptionsProps {
+  fieldName?: string;
+  title?: string;
+  options?: PlanOptions;
+  handleChange?: (e: any) => void;
+}
+
+const SelectGroupOne = ({ title, options, fieldName, handleChange }: SelectOptionsProps) => {
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 
@@ -11,33 +19,30 @@ const SelectGroupOne: React.FC = () => {
   return (
     <div className="mb-4.5">
       <label className="mb-2.5 block text-black dark:text-white">
-        {' '}
-        Subject{' '}
+        {title}
       </label>
 
       <div className="relative z-20 bg-transparent dark:bg-form-input">
         <select
-          value={selectedOption}
+          value={selectedOption || ''}
+          name={fieldName}
           onChange={(e) => {
+            handleChange && handleChange(e)
             setSelectedOption(e.target.value);
             changeTextColor();
           }}
-          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary ${
-            isOptionSelected ? 'text-black dark:text-white' : ''
-          }`}
+          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary ${isOptionSelected ? 'text-black dark:text-white' : ''
+            }`}
         >
-          <option value="" disabled className="text-body dark:text-bodydark">
-            Select your subject
+          <option value="" disabled>
+            Please select an option
           </option>
-          <option value="USA" className="text-body dark:text-bodydark">
-            USA
-          </option>
-          <option value="UK" className="text-body dark:text-bodydark">
-            UK
-          </option>
-          <option value="Canada" className="text-body dark:text-bodydark">
-            Canada
-          </option>
+          {options &&
+            Object.entries(options).map(([key, value]) => (
+              <option key={key} value={value} className="text-body dark:text-bodydark">
+                {key}
+              </option>
+            ))}
         </select>
 
         <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
