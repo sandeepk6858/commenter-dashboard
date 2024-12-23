@@ -78,7 +78,7 @@ const CreateUserForm = () => {
             console.log("Form submitted successfully", formData);
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('https://commenter.ai/api/v2/admin/user', {
+                const response = await fetch('http://localhost:3012/api/v2/admin/user', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

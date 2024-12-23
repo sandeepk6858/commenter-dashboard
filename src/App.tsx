@@ -7,7 +7,6 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Calendar from './pages/Calendar';
 import Chart from './pages/Chart';
-import ECommerce from './pages/Dashboard/ECommerce';
 import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
@@ -18,6 +17,8 @@ import Buttons from './pages/UiElements/Buttons';
 import { Toaster } from 'react-hot-toast';
 import Users from './pages/Users/Users';
 import CreateUserForm from './pages/Users/CreateUserForm';
+import ForgotPassword from './pages/Authentication/ForgotPassword';
+import ResetPassword from './pages/Authentication/ResetPassword';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -73,6 +74,24 @@ function App() {
             <>
               <PageTitle title="Signup" />
               <SignUp />
+            </>
+          }
+        />
+        <Route
+          path="/auth/forgot-password"
+          element={
+            <>
+              <PageTitle title="Forgot Password" />
+              <ForgotPassword />
+            </>
+          }
+        />
+        <Route
+          path="/auth/reset-password"
+          element={
+            <>
+              <PageTitle title="Reset Password" />
+              <ResetPassword />
             </>
           }
         />
