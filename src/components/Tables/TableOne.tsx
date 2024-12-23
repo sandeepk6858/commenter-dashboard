@@ -68,9 +68,8 @@ const TableOne = ({ title, columns, data }: TableProps) => {
 
         {data?.users.map((user: any, key: any, index: any) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-5 ${key === data.length - 1 ? '' : 'border-b border-stroke dark:border-strokedark'
-              }`}
-            key={index}
+            className={`grid grid-cols-3 sm:grid-cols-5 ${user.email === data.users[data.users.length - 1]?.email ? '' : 'border-b border-stroke dark:border-strokedark'}`}
+            key={user.email}
           >
             <div className="p-2.5 xl:p-5">
               <p className="text-black dark:text-white">{user.name}</p>
@@ -85,14 +84,15 @@ const TableOne = ({ title, columns, data }: TableProps) => {
               <p className="text-black dark:text-white">{user.status}</p>
             </div>
             <div className="p-2.5 xl:p-5">
-            <SwitcherOne
+              <SwitcherOne
                 userCurrentActiveStatus={
                   typeof userStatuses[user.email] === "boolean"
                     ? userStatuses[user.email]
                     : "-"
                 }
                 onToggle={() => handleToggleStatus(user.email)}
-              />
+                id={`switcher-${user.email}`} // Use a unique id
+                />
             </div>
           </div>
         ))}

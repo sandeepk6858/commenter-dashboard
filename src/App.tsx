@@ -16,7 +16,8 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import { Toaster } from 'react-hot-toast';
-import Users from './pages/Users';
+import Users from './pages/Users/Users';
+import CreateUserForm from './pages/Users/CreateUserForm';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -43,6 +44,16 @@ function App() {
             <>
               <PageTitle title="Users" />
               <Users />
+            </>
+          }
+        />
+
+        <Route
+          path="/create/user"
+          element={
+            <>
+              <PageTitle title="Create User" />
+              <CreateUserForm />
             </>
           }
         />
