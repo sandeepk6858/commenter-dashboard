@@ -19,6 +19,7 @@ import Users from './pages/Users/Users';
 import CreateUserForm from './pages/Users/CreateUserForm';
 import ForgotPassword from './pages/Authentication/ForgotPassword';
 import ResetPassword from './pages/Authentication/ResetPassword';
+import Dashboard from './pages/Dashboard/Welcome';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -102,8 +103,8 @@ function App() {
           path="/"
           element={
             <>
-              <PageTitle title="Sign up" />
-              <SignUp />
+              <PageTitle title="Dashboard" />
+              <Dashboard />
             </>
           }
         />
