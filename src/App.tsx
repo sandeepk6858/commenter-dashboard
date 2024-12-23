@@ -69,6 +69,7 @@ function App() {
 
         <Route
           index
+          path="/"
           element={
             <>
               <PageTitle title="Sign up" />
