@@ -140,13 +140,20 @@ const SignIn: React.FC = () => {
               </div>
 
               <div className="mt-4 text-center">
-              <p>
-                Dont have an account?{' '}
-                <Link to="/auth/signup" className="text-primary">
-                  Sign up
-                </Link>
-              </p>
-            </div>
+                <p>
+                  Dont have an account?{' '}
+                  <Link to="/auth/signup" className="text-primary">
+                    Sign up
+                  </Link>
+                </p>
+                <br/>
+                <p>
+                  Forgot Password?{' '}
+                  <Link to="/auth/forgot-password" className="text-primary">
+                    Forgot Password
+                  </Link>
+                </p>
+              </div>
             </form>
           </div>
         </div>
