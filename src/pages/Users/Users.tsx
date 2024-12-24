@@ -65,7 +65,7 @@ const Users = () => {
   return (
     <div>
       <DefaultLayout>
-        <div className='flex justify-around'>
+        <div className='flex justify-between'>
           <h1 className="text-2xl font-bold mb-6">List Users</h1>
           <Link
             to="/create/user"
