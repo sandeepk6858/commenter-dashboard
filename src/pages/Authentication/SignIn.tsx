@@ -68,6 +68,7 @@ const SignIn: React.FC = () => {
           // Handle success (e.g., navigate to another page or display a success message)
           toast.success('Logged in successfully')
           localStorage.setItem('token', data?.accessToken)
+          localStorage.setItem('adminName', data?.userData?.name)
           console.log(localStorage.getItem('token'))
           navigate('/users'); //navigate to users page
         } else {

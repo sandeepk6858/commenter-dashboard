@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import UserOne from '../../images/user/user-01.png';
-
+interface AdminDetails {
+  name: string;
+  email: string;
+  isActive: boolean;
+  lastLogin: any;
+}
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -35,6 +39,8 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const adminName = localStorage.getItem('adminName')?.trim();
+
   return (
     <div className="relative">
       <Link
@@ -45,14 +51,14 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {adminName}
           </span>
           <span className="block text-xs">Admin</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
+        {/* <span className="h-12 w-12 rounded-full">
           <img src={UserOne} alt="User" />
-        </span>
+        </span> */}
 
         <svg
           className="hidden fill-current sm:block"

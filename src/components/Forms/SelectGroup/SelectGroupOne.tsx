@@ -5,7 +5,7 @@ interface SelectOptionsProps {
   fieldName?: string;
   title?: string;
   options?: PlanOptions;
-  handleChange?: (e: any) => void;
+  handleChange?: (e: any) => void | Promise<void>;
 }
 
 const SelectGroupOne = ({ title, options, fieldName, handleChange }: SelectOptionsProps) => {
@@ -35,7 +35,7 @@ const SelectGroupOne = ({ title, options, fieldName, handleChange }: SelectOptio
             }`}
         >
           <option value="" disabled>
-            Please select an option
+            Select Plan
           </option>
           {options &&
             Object.entries(options).map(([key, value]) => (

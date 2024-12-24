@@ -91,7 +91,7 @@ const Users = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <TableOne data={users} title='Users List' columns={['Name', 'Email', 'Plan', 'Payment Status', 'Status', 'Payments']} />
+          <TableOne data={users} title='Users List' columns={['Email', 'Plan', 'Payment Status', 'Status', 'Payments']} />
         )}
 
         <div className="mt-4 flex justify-center items-center gap-2">

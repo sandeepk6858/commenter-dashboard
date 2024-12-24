@@ -5,15 +5,15 @@ import SelectGroupOne from "../../components/Forms/SelectGroup/SelectGroupOne"
 import toast from "react-hot-toast";
 
 export interface PlanOptions {
-    Starter: 'starter';
-    Professional: 'professional';
-    Influencer: 'proMonth';
-    Starter_Yearly: 'starter_yearly';
-    Professional_Yearly: 'professional_yearly';
-    Influencer_Yearly: 'proMonth_yearly';
+    Starter?: 'starter';
+    Professional?: 'professional';
+    Influencer?: 'proMonth';
+    Starter_Yearly?: 'starter_yearly';
+    Professional_Yearly?: 'professional_yearly';
+    Influencer_Yearly?: 'proMonth_yearly';
 }
 
-const planOptions: PlanOptions = {
+export const planOptions: PlanOptions = {
     Starter: 'starter',
     Professional: 'professional',
     Influencer: 'proMonth',
@@ -31,7 +31,7 @@ interface NewErrors {
 }
 
 interface Errors {
-    name?: string,
+    // name?: string,
     email?: string;
     password?: string;
     confirmPassword?: string;
@@ -40,7 +40,7 @@ interface Errors {
 
 const CreateUserForm = () => {
     const [formData, setFormData] = useState({
-        name: "",
+        // name: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -69,11 +69,8 @@ const CreateUserForm = () => {
     };
 
     const handleSubmit = async (e: any) => {
-        console.log('Trigger')
         e.preventDefault();
         const validationErrors = validate();
-        console.log('Trigger', Object.keys(validationErrors).length === 0)
-        console.log("Form submitted successfully", formData);
         if (Object.keys(validationErrors).length === 0) {
             console.log("Form submitted successfully", formData);
             try {
@@ -118,7 +115,7 @@ const CreateUserForm = () => {
                         </h2>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            <div>
+                            {/* <div>
                                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                                     Name
                                 </label>
@@ -133,7 +130,7 @@ const CreateUserForm = () => {
                                     />
                                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div>
                                 <label className="mb-2.5 block font-medium text-black dark:text-white">
