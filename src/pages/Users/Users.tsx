@@ -66,7 +66,7 @@ const Users = () => {
     <div>
       <DefaultLayout>
         <div className='flex justify-between'>
-          <h1 className="text-2xl font-bold mb-6">List Users</h1>
+          <h1 className="text-2xl font-bold mb-6">Users</h1>
           <Link
             to="/create/user"
             className="inline-flex items-center justify-center bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
@@ -91,7 +91,7 @@ const Users = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <TableOne data={users} title='Users List' columns={['Email', 'Plan', 'Payment Status', 'Status', 'Payments']} />
+          <TableOne data={users} title='Users List' columns={['Email', 'Current Plan', 'Payment Status', 'Status', 'Payments']} />
         )}
 
         <div className="mt-4 flex justify-center items-center gap-2">
