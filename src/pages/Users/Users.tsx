@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import DefaultLayout from "../../layout/DefaultLayout";
 import TableOne from '../../components/Tables/TableOne';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +11,8 @@ const Users = () => {
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(10); // Default limit
   const [lastVisible, setLastVisible] = useState(null); // Track the last document
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchUsers(currentPage, limit, lastVisible);
@@ -27,12 +29,20 @@ const Users = () => {
           'Content-Type': 'application/json',
         },
       });
+      console.log('DATA API RES', response)
       const data = await response.json();
-      console.log('DATA API RES', data)
-      toast(`${data?.message}`)
-      setUsers(data.adminUsers);
-      setTotalPages(data.totalPages); // Assuming the API returns `totalPages`
-      setLastVisible(data.lastDoc); // Update the last document
+      if (response?.status === 401) {
+        toast(`${data?.message}`)
+        navigate('/auth/signin')
+      }
+
+      if (response?.status === 200) {
+        console.log('DATA API RES', data)
+        toast(`${data?.message}`)
+        setUsers(data.adminUsers);
+        setTotalPages(data.totalPages); // Assuming the API returns `totalPages`
+        setLastVisible(data.lastDoc); // Update the last document
+      }
     } catch (error) {
       console.error('Error fetching users:', error);
     } finally {
