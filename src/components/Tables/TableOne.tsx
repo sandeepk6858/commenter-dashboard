@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SwitcherOne from "../Switchers/SwitcherOne";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 interface TableProps {
   title: string;
@@ -15,6 +16,8 @@ const TableOne = ({ title, columns, data }: TableProps) => {
       return acc;
     }, {})
   );
+
+  const navigate = useNavigate();
 
   const handleToggleStatus = async (email: string) => {
     const currentStatus = userStatuses[email];
@@ -44,6 +47,35 @@ const TableOne = ({ title, columns, data }: TableProps) => {
     }
   };
 
+  const handlePayment = async(email: string, stripeId: string, plan: string) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3012/api/v2/admin/payment/subscription', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          stripeId: stripeId,
+          plan: plan
+        })
+      });
+      const data = await response.json();
+      if (response?.status === 401) {
+        toast(`${data?.message}`)
+        navigate('/auth/signin')
+      }
+      if(response.status === 200 && data.success === true) {
+        toast(`${data?.message}`);
+        window.location.replace(data?.url);
+      }
+    } catch (error) {
+      console.error("Failed to update user status:", error);
+    }
+  }
+
   if (!data || data.length === 0) {
     return <p>No data to display.</p>;
   }
@@ -58,9 +90,9 @@ const TableOne = ({ title, columns, data }: TableProps) => {
       </h4>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <div className="grid grid-cols-6 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
           {columns?.map((colName) => (
-            <div className="p-2.5 xl:p-5">
+            <div className="p-2 xl:p-3">
               <h5 className="text-sm font-medium uppercase xsm:text-base">{colName}</h5>
             </div>
           ))}
@@ -68,7 +100,7 @@ const TableOne = ({ title, columns, data }: TableProps) => {
 
         {data?.users.map((user: any, key: any, index: any) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-5 ${user.email === data.users[data.users.length - 1]?.email ? '' : 'border-b border-stroke dark:border-strokedark'}`}
+            className={`grid grid-cols-6 sm:grid-cols-6 ${user.email === data.users[data.users.length - 1]?.email ? '' : 'border-b border-stroke dark:border-strokedark'}`}
             key={user.email}
           >
             <div className="p-2.5 xl:p-5">
@@ -92,7 +124,15 @@ const TableOne = ({ title, columns, data }: TableProps) => {
                 }
                 onToggle={() => handleToggleStatus(user.email)}
                 id={`switcher-${user.email}`} // Use a unique id
-                />
+              />
+            </div>
+            <div className="p-2.5 xl:p-5 flex justify-between items-center">
+              <button
+                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition"
+                onClick={() => handlePayment(user.email, user.stripeId, user.plan)}
+              >
+                Pay
+              </button>
             </div>
           </div>
         ))}
